@@ -1,5 +1,15 @@
+import "./App.css";
+
+import { CssBaseline } from "@mui/material";
+import { Navbar } from "./components";
+
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <>
+      <CssBaseline />
+      <Navbar />
+    </>
+  );
 }
 
 export default App;
