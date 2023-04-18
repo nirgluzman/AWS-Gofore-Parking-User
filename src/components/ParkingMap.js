@@ -1,6 +1,10 @@
 import { Stack, Box, Tooltip } from "@mui/material";
 
+import { Park } from "../context/ParkContext";
+
 export function ParkingMap() {
+  const { parkData } = Park();
+
   return (
     <>
       <Box
@@ -19,40 +23,25 @@ export function ParkingMap() {
         alignItems="center"
         spacing={2}
       >
-        <Tooltip title="free" leaveDelay={200}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              typography: "h4",
-              fontWeight: "bold",
-              backgroundColor: "success.light",
-              color: "white",
-              height: "10vh",
-              width: "3vw",
-            }}
-          >
-            1
-          </Box>
-        </Tooltip>
-        <Tooltip title="occupied" leaveDelay={200}>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              typography: "h4",
-              fontWeight: "bold",
-              backgroundColor: "error.main",
-              color: "white",
-              height: "10vh",
-              width: "3vw",
-            }}
-          >
-            2
-          </Box>
-        </Tooltip>
+        {parkData.map((row) => (
+          <Tooltip title={row.freeSpot ? "free" : "occupied"} leaveDelay={200}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                typography: "h4",
+                fontWeight: "bold",
+                backgroundColor: row.freeSpot ? "success.light" : "error.main",
+                color: "white",
+                height: "10vh",
+                width: "3vw",
+              }}
+            >
+              {row.parkingSpot}
+            </Box>
+          </Tooltip>
+        ))}
       </Stack>
     </>
   );

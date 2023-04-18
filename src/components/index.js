@@ -3,4 +3,6 @@
 
 export { Navbar } from "./Navbar";
 export { Home } from "./Home";
+export { EnterPark } from "./EnterPark";
+export { ExitPark } from "./ExitPark";
 export { ParkingMap } from "./ParkingMap";
