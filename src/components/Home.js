@@ -11,7 +11,7 @@ export function Home() {
   const { numFreeSpots } = Park();
 
   return (
-    <Box sx={{ p: 5, width: "100%" }}>
+    <Box sx={{ p: 3, width: "100%" }}>
       <Stack
         sx={{
           display: "flex",
@@ -43,7 +43,7 @@ export function Home() {
           elevation={2}
           sx={{
             width: 400,
-            height: 220,
+            height: 200,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -67,7 +67,7 @@ export function Home() {
             Next hours: 30¢
           </Typography>
         </Paper>
-        <Stack spacing={20} direction="row" sx={{ paddingTop: 5 }}>
+        <Stack spacing={20} direction="row">
           <Button
             onClick={() => navigate("/enter-park")}
             variant="contained"

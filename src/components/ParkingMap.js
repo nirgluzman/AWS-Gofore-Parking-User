@@ -8,8 +8,8 @@ import { Park } from "../context/ParkContext";
 import axios from "axios";
 
 export function ParkingMap({ vrn }) {
-  const [spotError, setSpotError] = useState("");
   const [parkConfirmMessage, setParkConfirmMessage] = useState("");
+  const [spotError, setSpotError] = useState("");
   const { parkData } = Park();
 
   const navigate = useNavigate();
