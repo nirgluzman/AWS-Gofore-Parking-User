@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button, TextField, Box, Container } from "@mui/material";
+import { ParkingMap } from "./ParkingMap";
 
 export function EnterPark() {
   const [vrn, setVrn] = useState("");
@@ -11,7 +12,9 @@ export function EnterPark() {
 
   const handleParkEnter = async (event) => {
     event.preventDefault();
-    setVrn(new FormData(event.currentTarget));
+
+    const data = new FormData(event.currentTarget);
+    setVrn(data.get("vrn"));
     setSelectSpot(true);
   };
 
@@ -54,6 +57,7 @@ export function EnterPark() {
           </Button>
         </Box>
       </Box>
+      {selectSpot && <ParkingMap vrn={vrn} />}
     </Container>
   );
 }

@@ -33,7 +33,7 @@ export const ParkContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => fetchParkData(), 1000);
+    const interval = setInterval(() => fetchParkData(), 2000);
     return () => clearInterval(interval);
   }, []);
 
