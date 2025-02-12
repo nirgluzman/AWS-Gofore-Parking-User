@@ -1,23 +1,20 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from 'react';
+import { Alert, AlertTitle } from '@mui/material';
 
-import axios from "axios";
+import axios from 'axios';
 
 const ParkContext = createContext();
 
 export const ParkContextProvider = ({ children }) => {
   const [parkData, setParkData] = useState([]);
   const [numFreeSpots, setNumFreeSpots] = useState(0);
-  const [parkError, setParkError] = useState("");
+  const [parkError, setParkError] = useState('');
 
   const fetchParkData = async () => {
-    setParkError("");
+    setParkError('');
 
     try {
-      const result = await axios.get(process.env.REACT_APP_API_URL + "all");
-      if (result.data.length === 0) {
-        throw new Error("An error occurred, please try again!");
-      }
-
+      const result = (await axios.get(process.env.REACT_APP_API_URL + 'all')).data;
       setParkData(result.data);
 
       const count = result.data.reduce((counter, obj) => {
@@ -27,8 +24,8 @@ export const ParkContextProvider = ({ children }) => {
 
       setNumFreeSpots(count);
     } catch (err) {
-      setParkError(err.message);
-      console.log(err.message);
+      console.log(err);
+      setParkError(err.response.data.message);
     }
   };
 
@@ -39,6 +36,17 @@ export const ParkContextProvider = ({ children }) => {
 
   return (
     <ParkContext.Provider value={{ parkError, numFreeSpots, parkData }}>
+      {parkError && (
+        <Alert
+          severity='error'
+          sx={{ mb: 2 }}
+          onClose={() => {
+            setParkError('');
+          }}>
+          <AlertTitle>Error</AlertTitle>
+          {parkError}
+        </Alert>
+      )}
       {children}
     </ParkContext.Provider>
   );
